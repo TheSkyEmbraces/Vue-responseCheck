@@ -27,15 +27,17 @@ module.exports = {
             ]
         }],
     },
-    plugins: [
-        new VueloaderPlugin(),
-    ],
     output: {
         filename: '[name].js',
-        path: path.join(__dirname + '/dist/'),
+        path: path.resolve(__dirname, 'dist'),
         publicPath: '/dist/',
     },
-    // devServer: {
-    //     publicPath: path.join(__dirname + '/dist/'),
-    // }
+    devServer: {
+        port:8080,
+    },
+    plugins: [
+        new VueloaderPlugin({
+            template:'responseCheck.html',
+        }),
+    ],
 };
