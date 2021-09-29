@@ -24,14 +24,18 @@
     },
 
     //컴퓨티드는 성능에 직접적인 영향을 미침
-    computed:{
-      average(){
-        return this.result.reduce((a,c) => a + c, 0) / this.result.length || 0
+    computed: {
+      average() {
+        return this.result.reduce((a, c) => a + c, 0) / this.result.length || 0
       }
     },
     methods: {
       onReset() {
-        this.result = []
+        if (this.state === "waiting") {
+          this.result = [];
+          this.state = "waiting";
+          this.message = "클릭해서 시작하세요!";
+        }
       },
       onClickScreen() {
         if (this.state === "waiting") {
@@ -49,7 +53,7 @@
         } else if (this.state === "now") {
           endTime = new Date();
           this.state = "waiting";
-          this.message = "잘하셨습니다! 다시 시작하시려면 클릭해서 시작하세요"
+          this.message = "다시 시작하시려면 클릭 하세요"
           this.result.push(endTime - startTime);
         }
       },
